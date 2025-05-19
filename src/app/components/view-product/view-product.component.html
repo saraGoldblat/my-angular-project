@@ -1,0 +1,17 @@
+
+@if(products.length === 0){
+  <h2>טוען מוצרים </h2>
+}
+@else {
+ 
+<div class="product-cards">
+  @for(p of products;track $index){
+    <div class="product-card">
+      <img [src]="p.imageSrc" alt="{{p.name}}" />
+      <p> {{p.description}}</p>
+      <p>{{p.price}}$ USD </p>
+    </div>
+  }
+
+</div>
+}

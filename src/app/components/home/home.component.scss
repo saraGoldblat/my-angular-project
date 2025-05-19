@@ -1,0 +1,23 @@
+.home-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* מונע גלילה בתוך הקומפוננטה */
+  }
+  
+  .full-screen-image {
+    width: 100vw; /* תופס את כל רוחב המסך */
+    height: 100vh; /* תופס את כל גובה המסך */
+    object-fit: cover; /* מבטיח שהתמונה תתאים למסך בלי עיוות */
+    display: block;
+  }
+  
+  /* מניעת גלילה כללית */
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* מונע גלילה לשני הכיוונים */
+    width: 100%;
+    height: 100%;
+  }
