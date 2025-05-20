@@ -16,3 +16,8 @@ export class OrderService {
     return this.http.get<Array<Order>>(this.orderURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
   }
 }
+
+
+
+
+
