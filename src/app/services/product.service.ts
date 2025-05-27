@@ -16,6 +16,9 @@ export class ProductService {
   {
     return this.http.get<Array<Product>>(this.productURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
   }
+  getOutOfStockProducts(): Observable<Array<Product>> {
+    return this.http.get<Array<Product>>(`${this.productURL}/outofstock`);
+  }
   //פונקציה שמקבלת מספר ומחזירה מוצר מסוים
   getProductByID(productId:number): Observable<Product>{
     return this.http.get<Product>(`${this.productURL}/${productId}`,{responseType:'text' as 'json'})
@@ -27,4 +30,13 @@ export class ProductService {
   return this.http.put(`${this.productURL}/${productId}`,newProduct)
 
   }
+
+  getProductsByCategory(categoryId: number): Observable<Array<Product>> {
+    return this.http.get<Array<Product>>(`${this.productURL}/category/${categoryId}`);
+   
+  }
+  addProduct(newProduct: Product): Observable<any> {
+    return this.http.post(this.productURL, newProduct);
+  }
+  
 }

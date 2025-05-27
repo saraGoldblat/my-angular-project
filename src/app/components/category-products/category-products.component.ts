@@ -23,7 +23,7 @@ export class CategoryProductsComponent implements OnInit ,OnDestroy{
     private route: ActivatedRoute,
     private productService: ProductService,
     private categoryService:CategoryService,
-    cartService:CartService
+    private cartService:CartService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +32,10 @@ export class CategoryProductsComponent implements OnInit ,OnDestroy{
       this.loadCategoryAndProducts(this.categoryName);
     });
   }
-
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    alert("המוצר התווסף לעגלה")
+  }
   loadCategoryAndProducts(name: string): void {
     this.categoryService.getCategoryByName(name).subscribe({
       next: category => {
@@ -48,6 +51,7 @@ export class CategoryProductsComponent implements OnInit ,OnDestroy{
       }
     });
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

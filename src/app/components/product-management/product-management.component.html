@@ -1,0 +1,27 @@
+<h2>Product Management</h2>
+
+<button mat-raised-button color="primary" (click)="openAddProduct()">Add Product</button>
+<button mat-button (click)="toggleOutOfStock()">
+  {{ showOutOfStock ? 'Show All Products' : 'Show Only Out of Stock' }}
+</button>
+
+<div class="product-grid">
+  <div class="product-card" *ngFor="let product of products" [ngClass]="{'out-of-stock': product.stockQuantity}">
+    <div class="product-image-wrapper">
+      <img [src]="product.imageSrc" [alt]="product.name" class="product-image" />
+      <span *ngIf="product.stockQuantity==0" class="out-of-stock-label">Out of Stock</span>
+    </div>
+    <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <p class="desc">{{ product.description }}</p>
+      <p class="price">{{ product.price | number:'1.0-2' }}&#36; USD</p>
+      <p class="qty">Quantity: {{ product.stockQuantity }}</p>
+      <p class="category">Category: {{ product.category?.name_category }} (ID: {{ product.categoryId }})</p>
+      <div class="actions">
+        <button mat-stroked-button color="accent" (click)="openEditProduct(product)">Edit</button>
+        <button mat-stroked-button color="warn" (click)="deleteProduct(product.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+

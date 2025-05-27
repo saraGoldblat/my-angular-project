@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { User } from '../classes/user';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -10,10 +10,18 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class UserService {
 
-
+  
   userURL:string="https://localhost:7158/api/User"
+  public currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient) {
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+      this.currentUserSubject.next(JSON.parse(savedUser));
+   }
+   }
   getAllUsers():Observable<Array<User>>
   {
     console.log('הפונקציה getAllUsers קראה את כל ');
@@ -43,6 +51,24 @@ export class UserService {
         return throwError(error);
       })
     );
+  }
+  getUserByNameAndPassword(userName: string, password: string): Observable<User> {
+    return this.http.get<User>(`${this.userURL}/${userName}/${password}`, { responseType: 'text' as 'json' })
+      .pipe(tap(user => {
+        if (user) {
+          this.currentUserSubject.next(user); // עדכון המשתמש הנוכחי
+        }
+      }));
+  }
+  logout(): void {
+    this.currentUserSubject.next(null);
+    localStorage.removeItem('currentUser');
+  
+   
+  }
+  setCurrentUser(user: User): void {
+    this.currentUserSubject.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
   
 }
