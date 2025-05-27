@@ -1,0 +1,69 @@
+
+h2 {
+    text-align: center;
+    font-size: 32px;
+    margin: 40px 0 20px;
+    color: #2e2e2e;
+    font-family: 'Georgia', serif;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    max-width: 700px;
+    margin: 0 auto;
+
+    li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 14px 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+
+            .user-id {
+                font-size: 13px;
+                color: #999;
+            }
+
+            .user-name {
+                font-size: 18px;
+                font-weight: 500;
+                color: #333;
+            }
+        }
+
+        .user-actions {
+            display: flex;
+
+            button {
+                background-color: #dc3545;
+                color: white;
+                border: none;
+                padding: 8px 14px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: 0.3s;
+
+                &:hover {
+                    background-color: #c82333;
+                }
+            }
+        }
+    }
+}

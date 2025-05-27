@@ -1,7 +1,4 @@
-/* Header styles */
 .header {
-  // position: fixed;
-  top: 0;
   width: 100%;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -16,7 +13,6 @@
     .right-icons {
       display: flex;
       gap: 15px;
-      justify-content: flex-start; /* מעביר את האייקונים לצד ימין */
 
       .icon {
         font-size: 20px;
@@ -40,29 +36,43 @@
     padding: 10px 0;
     border-top: 1px solid #ddd;
 
-    .nav-link {
-      text-decoration: none;
-      color: black;
+    .nav-link, .dropbtn {
+      background: none;
+      border: none;
       font-size: 16px;
       font-weight: bold;
-      transition: color 0.3s;
+      color: black;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-      &:hover,
-      &:focus {
-        color: brown;
-        cursor: pointer;
+    .dropdown {
+      position: relative;
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        z-index: 1;
+        min-width: 150px;
+
+        a {
+          display: block;
+          padding: 10px;
+          color: black;
+          text-decoration: none;
+          font-size: 14px;
+
+          &:hover {
+            background-color: #f1f1f1;
+          }
+        }
+      }
+
+      &:hover .dropdown-content {
+        display: block;
       }
     }
-  }
-}
-
-/* Main image styles */
-.main-image {
-  margin-top: 120px; // To account for the fixed header
-
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
   }
 }

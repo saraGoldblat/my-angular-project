@@ -1,0 +1,17 @@
+
+<h2>User Management</h2>
+
+<ul class="user-list">
+  <li *ngFor="let user of users">
+    <div class="user-info">
+      <span class="user-id">#{{ user.userId}}</span>
+      <span class="user-name">{{ user.username }}  {{user.lastName}}</span>
+      <span class="user-name">{{ user.email }}</span>
+      <span class="user-name">{{ user.phone }}</span>
+      <span class="user-name">{{ user.address}}</span>
+    </div>
+    <div class="user-actions">
+      <button (click)="deleteUser(user.userId)">🗑 Delete</button>
+    </div>
+  </li>
+</ul>

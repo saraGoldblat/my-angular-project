@@ -1,19 +1,27 @@
 <div class="header">
   <div class="top-nav">
     <div class="right-icons">
-      <a routerLink="/login">
-        <span class="icon">👤</span>
-      </a>
+      <a *ngIf="!user" routerLink="/login"><span class="icon">👤</span></a>
+      <a *ngIf="user" routerLink="/my-account"><span class="icon">👤</span></a>
       <span class="icon">🛒</span>
     </div>
     <div class="logo">
       <h1>Goldblat Diamonds</h1>
     </div>
   </div>
+
+  <p *ngIf="ifUser">hello to {{user?.username}}</p>
   <nav class="main-nav">
-    <a routerLink="/viewproduct" class="nav-link">Jewelry</a>
-    <a routerLink="/rings" class="nav-link">Rings</a>
-    <a routerLink="/necklaces" class="nav-link">Necklaces</a>
-    <a routerLink="/bracelets" class="nav-link">Bracelets</a>
+    <div class="dropdown">
+      <button class="dropbtn">Jewelry</button>
+      <div class="dropdown-content">
+        <a [routerLink]="['/category', 'rings']">Rings</a>
+        <a [routerLink]="['/category', 'earrings']">Earrings</a>
+        <a [routerLink]="['/category', 'bracelets']">Bracelets</a>
+        <a [routerLink]="['/category', 'necklaces']">Necklaces</a>
+      </div>
+    </div>
+    <a class="nav-link" routerLink="/category/diamonds">Diamonds</a>
+    <a class="nav-link" routerLink="/sale">SALE</a>
   </nav>
 </div>

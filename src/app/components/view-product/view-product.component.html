@@ -8,7 +8,7 @@
   @for(p of products;track $index){
     <div class="product-card">
       <img [src]="p.imageSrc" alt="{{p.name}}" />
-      <p> {{p.description}}</p>
+      <p> {{p.name}}</p>
       <p>{{p.price}}$ USD </p>
     </div>
   }

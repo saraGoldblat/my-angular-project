@@ -1,0 +1,33 @@
+<h2>Category Management</h2>
+
+<div class="action-buttons">
+  <button (click)="showAddForm = !showAddForm">
+    ➕ Add Category
+  </button>
+  <button (click)="loadCategories()">
+    🔄 Refresh Categories
+  </button>
+</div>
+
+<div class="category-form" *ngIf="showAddForm">
+  <input [(ngModel)]="newCategoryName" placeholder="Enter new category name" />
+  <button (click)="addCategory()">✔ Save</button>
+</div>
+
+<div class="category-form" *ngIf="selectedCategory">
+  <input [(ngModel)]="selectedCategory.name_category" />
+  <button (click)="updateCategory()">✏ Update</button>
+</div>
+
+<ul class="category-list">
+    <li *ngFor="let category of categories">
+      <div class="category-info">
+        <span class="category-id">#{{ category.id }}</span>
+        <span class="category-name">{{ category.name_category }}</span>
+      </div>
+      <div class="category-actions">
+        <button (click)="selectCategory(category)">✏ Edit</button>
+        <button (click)="deleteCategory(category.id)">🗑 Delete</button>
+      </div>
+    </li>
+  </ul>
