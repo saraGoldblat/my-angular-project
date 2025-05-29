@@ -11,6 +11,9 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductManagementComponent } from './components/product-management/product-management.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -24,7 +27,13 @@ export const routes: Routes = [
     {path:'userManagement',component:UserManagementComponent},
     { path: 'product/:id', component: ProductDetailsComponent },
     {path:'productManagement',component:ProductManagementComponent},
-    { path: 'cart', component: CartComponent }
+    { path: 'cart', component: CartComponent },
+    { path: 'order-history', component: OrderHistoryComponent },
+    {
+  path: 'admin-dashboard',
+  component: AdminDashboardComponent,
+  canActivate: [adminGuard]
+},
 
 
 

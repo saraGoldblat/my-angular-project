@@ -4,10 +4,13 @@ import { LoginComponent } from "../login/login.component";
 import { User } from '../../classes/user';
 import { UserService } from '../../services/user.service';
 import { CommonModule, NgIf } from '@angular/common';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive,NgIf,CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive,NgIf,CommonModule,MatMenu,MatToolbar,MatIcon,MatMenuModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
@@ -42,7 +45,8 @@ ifUser:boolean = false
   userData!.lastName,
   userData!.phone,
   userData!.address,
-  userData!.email
+  userData!.email,
+  userData!.password
       );
       console.log('User from service:', this.user);
       console.log('User name:', this.user.username);
@@ -50,4 +54,17 @@ ifUser:boolean = false
    
   }
  
+ goToAccount() {
+  const token = localStorage.getItem('jwt');
+  if (token) {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload['role'] === 'manager') {
+      this.router.navigate(['/admin-dashboard']);
+      return;
+    }
+    this.router.navigate(['/my-account']);
+  } else {
+    this.router.navigate(['/login']);
+  }
+}
 }

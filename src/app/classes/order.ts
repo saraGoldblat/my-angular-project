@@ -6,7 +6,7 @@ constructor(
   public  orderId :number,
   public  orderDate :Date,
   public  userId :number,
-  public  totalAmount :DoubleRange,
+  public totalAmount: number,
   public  user :User
  
 ) {}

@@ -12,6 +12,8 @@ import { UserService } from '../../services/user.service';
 
 export class LoginComponent {
   loginForm: FormGroup;
+   flag:boolean | undefined;
+    errorMessage: string = '';
 
   constructor(private fb: FormBuilder,
      private userService: UserService,
@@ -25,19 +27,61 @@ export class LoginComponent {
    onLogin(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      this.userService.getUserByNameAndPassword(username, password).subscribe(
+      this.userService.getUserByNagmeAndPassword(username, password).subscribe(
         (user) => {
-          if (user) {
-            this.userService.setCurrentUser(user); // כאן שמירת המשתמש!
-            this.router.navigate(['/my-account']);
-          } else {
-            alert('שם משתמש או סיסמה לא נכונים');
-          }
-        },
-        () => {
-          alert('שגיאה בשרת');
-        }
-      );
+       this.userService.isManager(user).subscribe(
+         (isManager: boolean) => {
+           this.flag = isManager; // עדכון המשתנה עם התוצאה
+           console.log('Is manager:', this.flag);
+           this.router.navigate(['/admin-dashboard']);
+         },
+         (error) => {
+           if (user) {
+             this.userService.setCurrentUser(user); // כאן שמירת המשתמש!
+             this.router.navigate(['/my-account']);
+           } else {
+             alert('שם משתמש או סיסמה לא נכונים');
+           }
+         },
+         () => {
+           alert('שגיאה בשרת');
+         }
+       );
+      },
+      (error) => {
+        alert('שגיאה בשרת');
+      }
+    );
     }
   }
 }
+  
+
+
+ 
+// onLogin(): void {
+//   if (this.loginForm.valid) {
+//     const { username, password } = this.loginForm.value;
+//     this.userService.login(username, password).subscribe(
+//       (res: any) => {
+//         if (res && res.token) {
+//           localStorage.setItem('jwt', res.token); // שמירת הטוקן
+//           // בדיקת תפקיד מהטוקן
+//           const payload = JSON.parse(atob(res.token.split('.')[1]));
+//           if (payload['role'] === 'manager') {
+//             this.router.navigate(['/admin-dashboard']);
+//           } else {
+//             this.router.navigate(['/my-account']);
+//           }
+//         } else {
+//           alert('שם משתמש או סיסמה לא נכונים');
+//         }
+//       },
+//       () => {
+//         alert('שגיאה בשרת');
+//       }
+//     );
+//   }
+// }
+
+

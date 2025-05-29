@@ -1,1 +1,9 @@
 <p>order-history works!</p>
+<h2>Order History</h2>
+<div *ngIf="orders.length === 0">No orders found.</div>
+<div *ngFor="let order of orders">
+  <!-- <p>Order ID: {{ order.orderId }}</p> -->
+  <p>Date: {{ order.orderDate | date:'short' }}</p>
+  <p>Total: {{ order.totalAmount| number:'1.0-2' }}$</p>
+  <hr>
+</div>

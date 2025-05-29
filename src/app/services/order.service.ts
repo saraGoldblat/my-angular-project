@@ -15,6 +15,9 @@ export class OrderService {
   {
     return this.http.get<Array<Order>>(this.orderURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
   }
+  getOrdersByUserId(userId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.orderURL}/user/${userId}`);
+  }
 }
 
 

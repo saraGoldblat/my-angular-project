@@ -6,10 +6,11 @@ import { ViewProductComponent } from "./components/view-product/view-product.com
 import { RegisterComponent } from "./components/register/register.component";
 import { ProductTestComponent } from "./components/product-test/product-test.component";
 import { ProductManagementComponent } from "./components/product-management/product-management.component";
+import { UserManagementComponent } from "./components/user-management/user-management.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavComponent, HomeComponent, ViewProductComponent, RegisterComponent, ProductTestComponent, ProductManagementComponent],
+  imports: [RouterOutlet, NavComponent, HomeComponent, ViewProductComponent, RegisterComponent, ProductTestComponent, ProductManagementComponent, UserManagementComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

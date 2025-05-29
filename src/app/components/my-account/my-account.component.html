@@ -1,3 +1,27 @@
-<<p>my-account works!</p>
+<h2>My Profile</h2>
+<form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+  <label>
+    First Name:
+    <input formControlName="username" />
+  </label>
+  <label>
+    Last Name:
+    <input formControlName="lastName" />
+  </label>
+  <label>
+    Phone:
+    <input formControlName="phone" />
+  </label>
+  <label>
+    Address:
+    <input formControlName="address" />
+  </label>
+  <label>
+    Email:
+    <input formControlName="email" />
+  </label>
+  <button type="submit" [disabled]="!profileForm.valid">Save</button>
+</form>
 
-<button (click)="logout()">התנתקות</button>
+<button (click)="logout()">Logout</button>
+<a routerLink="/order-history">View Order History</a>
