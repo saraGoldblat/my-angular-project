@@ -14,6 +14,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { adminGuard } from './guards/admin.guard';
+import { TestComponentComponent } from './components/test-component/test-component.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -22,18 +24,20 @@ export const routes: Routes = [
     {path:'register',component:RegisterComponent},
     {path: '',component:HomeComponent},
     { path: 'category/:name', component: CategoryProductsComponent },
-    {path: 'categoryManagement', component:CategoryManagementComponent}, // Redirect to home for any unknown routes
+    {path: 'categor-management', component:CategoryManagementComponent}, // Redirect to home for any unknown routes
     {path:'my-account',component:MyAccountComponent},
-    {path:'userManagement',component:UserManagementComponent},
+    {path:'user-management',component:UserManagementComponent},
     { path: 'product/:id', component: ProductDetailsComponent },
-    {path:'productManagement',component:ProductManagementComponent},
+    {path:'product-management',component:ProductManagementComponent},
     { path: 'cart', component: CartComponent },
     { path: 'order-history', component: OrderHistoryComponent },
+{path: 'test-component',component:TestComponentComponent}, // Redirect to admin-dashboard for /admin
     {
   path: 'admin-dashboard',
   component: AdminDashboardComponent,
-  canActivate: [adminGuard]
+  // canActivate: [adminGuard]
 },
+{path:'about-us',component:AboutUsComponent}
 
 
 

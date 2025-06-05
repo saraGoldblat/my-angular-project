@@ -7,10 +7,11 @@ import { RegisterComponent } from "./components/register/register.component";
 import { ProductTestComponent } from "./components/product-test/product-test.component";
 import { ProductManagementComponent } from "./components/product-management/product-management.component";
 import { UserManagementComponent } from "./components/user-management/user-management.component";
+import { TestComponentComponent } from "./components/test-component/test-component.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavComponent, HomeComponent, ViewProductComponent, RegisterComponent, ProductTestComponent, ProductManagementComponent, UserManagementComponent],
+  imports: [RouterOutlet, NavComponent, HomeComponent, ViewProductComponent, RegisterComponent, ProductTestComponent, ProductManagementComponent, UserManagementComponent, TestComponentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -10,7 +10,7 @@ import { catchError, tap,map } from 'rxjs/operators';
 })
 export class UserService {
 
-  
+   private apiUrl = "https://localhost:7158/api/Login";
   userURL:string="https://localhost:7158/api/User"
   public currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
@@ -55,11 +55,14 @@ export class UserService {
   }
   getUserByNagmeAndPassword(userName: string, password: string): Observable<User> {
     return this.http.get<User>(`${this.userURL}/${userName}/${password}`, { responseType: 'text' as 'json' })
-      .pipe(tap(user => {
+      .pipe(
+      tap(user => {
+        console.log('User received:', user);
         if (user) {
-          this.setCurrentUser(user); // שמירה גם ב-localStorage
+        this.setCurrentUser(user); // שמירה גם ב-localStorage
         }
-      }));
+      })
+      );
   }
   logout(): void {
     this.currentUserSubject.next(null);
@@ -73,30 +76,80 @@ export class UserService {
   }
   
  
-  isManager(user: User): Observable<boolean> {
-    return this.http.post<{ Token: string }>('https://localhost:7158/api/Login',   user,
-    {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }).pipe(
+  // isManager(user: User): Observable<boolean> {
+  //   return this.http.post<{ Token: string }>('https://localhost:7158/api/Login',   user,
+  //   {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   }).pipe(
     
-      map((response) => {
-        console.log("בדיקה ")
-        const token = response.Token; // קבלת הטוקן מהשרת
-        console.log("token: ",token)
-        localStorage.setItem('authToken', token); // שמירת הטוקן ב-localStorage
-        return true; // המשתמש הוא מנהל
-      }),
-      catchError((error) => {
-         console.error("Error occurred:", error);
-        if (error.status === 401) {
-          return [false]; // המשתמש אינו מנהל
-        }
-        throw error; // טיפול בשגיאות אחרות
-      })
-    );
+  //     map((response) => {
+  //       console.log("בדיקה ")
+  //       const token = response.Token; // קבלת הטוקן מהשרת
+  //       console.log("token: ",token)
+  //       localStorage.setItem('authToken', token); // שמירת הטוקן ב-localStorage
+  //       return true; // המשתמש הוא מנהל
+  //     }),
+  //     catchError((error) => {
+  //        console.error("Error occurred:", error);
+  //       if (error.status === 401) {
+  //         return [false]; // המשתמש אינו מנהל
+  //       }
+  //       throw error; // טיפול בשגיאות אחרות
+  //     })
+  //   );
+  // }
+   isManager(user1: User,password1:string): Observable<boolean> {
+
+  // const user: User = {
+  //   userId: 1,
+  //   username: "aaa",
+  //   password: "1234567",
+  //   lastName: "Greenfeld",
+  //   phone: "1234567565",
+  //   address: "Some Address",
+  //   email: "aaa@example.com"
+  // };
+  if (typeof user1 === 'string') {
+      console.log('User is an object:', user1);
+     
+        user1 = JSON.parse(user1);
+         console.log('Parsed user:', user1.userId);
+      
+      console.log('Parsed user:', user1);
   }
+  const user: User = {
+    userId: user1.userId,
+    username: user1.username,
+    password: password1,
+    lastName: user1.lastName,
+    phone: user1.phone,
+    address: user1.address,
+    email: user1.email
+  };
+  console.log('User object:', user);  
+  const url = "https://localhost:7158/api/Login";
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post<{ token: string }>(url, user, { headers }).pipe(
+    map((response) => {
+      console.log('Full response:', response);
+      console.log('Token received:', response.token);
+      localStorage.setItem('authToken', response.token); // שמירת הטוקן ב-localStorage
+      alert('Login successful!');
+      return true; // מחזיר true אם הבקשה הצליחה
+    }),
+    catchError((error) => {
+      console.error('Login failed:', error);
+      alert('Login failed!');
+      return [false]; // מחזיר false אם הבקשה נכשלה
+    })
+  );
+}
+   
 
   // isManager(user: User):boolean{
   //   if( user.username=='aaa'&&user.password=='1234567')
@@ -104,6 +157,7 @@ export class UserService {
   //   return false;
 
   // }
+
+
+
 }
-
-

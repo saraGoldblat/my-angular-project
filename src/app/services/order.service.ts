@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../classes/order';
@@ -13,7 +13,12 @@ export class OrderService {
   constructor(private http:HttpClient) { }
   getAllOrders():Observable<Array<Order>>
   {
-    return this.http.get<Array<Order>>(this.orderURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
+    const token = localStorage.getItem('authToken'); // שליפת ה-token מ-localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}` // הוספת ה-token לכותרת Authorization
+    });
+
+    return this.http.get<Array<Order>>(this.orderURL, { headers })//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
   }
   getOrdersByUserId(userId: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.orderURL}/user/${userId}`);

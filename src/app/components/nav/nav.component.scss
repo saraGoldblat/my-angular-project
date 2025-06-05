@@ -95,3 +95,11 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+/* Remove unique button styling for Jewelry */
+.main-nav .dropbtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}

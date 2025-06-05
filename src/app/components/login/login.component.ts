@@ -22,41 +22,39 @@ export class LoginComponent {
       username: ['', [Validators.required, Validators.minLength(2)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-  }
+    }
 
-   onLogin(): void {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.userService.getUserByNagmeAndPassword(username, password).subscribe(
-        (user) => {
-       this.userService.isManager(user).subscribe(
-         (isManager: boolean) => {
-           this.flag = isManager; // עדכון המשתנה עם התוצאה
-           console.log('Is manager:', this.flag);
-           this.router.navigate(['/admin-dashboard']);
-         },
-         (error) => {
-           if (user) {
-             this.userService.setCurrentUser(user); // כאן שמירת המשתמש!
-             this.router.navigate(['/my-account']);
-           } else {
-             alert('שם משתמש או סיסמה לא נכונים');
-           }
-         },
-         () => {
-           alert('שגיאה בשרת');
-         }
-       );
-      },
-      (error) => {
-        alert('שגיאה בשרת');
+ onLogin(): void {
+  if (this.loginForm.valid) {
+    const { username, password } = this.loginForm.value;
+    this.userService.getUserByNagmeAndPassword(username, password).subscribe(
+      (user) => {
+        this.userService.isManager(user,password).subscribe(
+          (isManager: boolean) => {
+            this.flag = isManager; // עדכון המשתנה עם התוצאה
+            console.log('Is manager:', this.flag);
+            if( this.flag) {
+
+              // Change '/app-admin-dashboard' to the correct route, e.g., '/admin-dashboard'
+              this.router.navigate(['/admin-dashboard']);
+            }
+          },
+          (error) => {
+            if (user) {
+              this.userService.setCurrentUser(user); // כאן שמירת המשתמש!
+              this.router.navigate(['/my-account']);
+            } else {
+              alert('שם משתמש או סיסמה לא נכונים');
+            }
+          }
+        );
       }
     );
-    }
   }
-}
   
+}
 
+}
 
  
 // onLogin(): void {
