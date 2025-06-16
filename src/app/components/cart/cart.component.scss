@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #000;
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #000;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+img {
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+span {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+/* עיצוב מיוחד עבור כפתורי פעולה (Clear Cart ו- Checkout) */
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* עיצוב עבור הודעות (למשל "cart is empty") */
+.empty-cart {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}

@@ -67,6 +67,8 @@ export class UserService {
   logout(): void {
     this.currentUserSubject.next(null);
     localStorage.removeItem('currentUser');
+    window.location.reload();
+    window.location.href = '/';
   
    
   }
@@ -143,8 +145,6 @@ export class UserService {
       return true; // מחזיר true אם הבקשה הצליחה
     }),
     catchError((error) => {
-      console.error('Login failed:', error);
-      alert('Login failed!');
       return [false]; // מחזיר false אם הבקשה נכשלה
     })
   );

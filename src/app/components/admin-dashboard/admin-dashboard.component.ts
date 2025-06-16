@@ -8,5 +8,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent {
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('currentUser');
+    window.location.reload();
+    window.location.href = '/';
+  }
 
 }

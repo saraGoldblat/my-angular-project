@@ -1,27 +1,34 @@
+<!-- חלק מה-my-account.component.html -->
 <h2>My Profile</h2>
-<form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-  <label>
-    First Name:
-    <input formControlName="username" />
-  </label>
-  <label>
-    Last Name:
-    <input formControlName="lastName" />
-  </label>
-  <label>
-    Phone:
-    <input formControlName="phone" />
-  </label>
-  <label>
-    Address:
-    <input formControlName="address" />
-  </label>
-  <label>
-    Email:
-    <input formControlName="email" />
-  </label>
-  <button type="submit" [disabled]="!profileForm.valid">Save</button>
+
+<form [formGroup]="profileForm">
+  <div class="form-field">
+    <label for="username">Username</label>
+    <input formControlName="username" id="username" />
+  </div>
+  <div class="form-field">
+    <label for="lastName">Last Name</label>
+    <input formControlName="lastName" id="lastName" />
+  </div>
+  <div class="form-field">
+    <label for="phone">Phone</label>
+    <input formControlName="phone" id="phone" />
+  </div>
+  <div class="form-field">
+    <label for="address">Address</label>
+    <input formControlName="address" id="address" />
+  </div>
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input formControlName="email" id="email" />
+  </div>
+
+  <div class="buttons-container">
+    <button type="button" class="save-button" (click)="saveProfile()">Save</button>
+    <button type="button" class="logout-button" (click)="logout()">Logout</button>
+  </div>
 </form>
 
-<button (click)="logout()">Logout</button>
-<a routerLink="/order-history">View Order History</a>
+<div class="extra-links">
+  <a routerLink="/order-history">View Order History</a>
+</div>

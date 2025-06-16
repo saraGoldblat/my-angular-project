@@ -1,3 +1,13 @@
+<div class="sort-buttons">
+  <button mat-button [matMenuTriggerFor]="sortMenu">Sort by</button>
+  <mat-menu #sortMenu="matMenu">
+    <button mat-menu-item (click)="sortProducts('asc')">Low to High</button>
+    <button mat-menu-item (click)="sortProducts('desc')">High to Low</button>
+  </mat-menu>
+</div>
+
+
+
 <div class="product-cards">
   <div class="product-card" *ngFor="let product of products">
     <a [routerLink]="['/product', product.id]" class="product-link">

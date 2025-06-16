@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../classes/product';
@@ -17,7 +17,15 @@ export class ProductService {
     return this.http.get<Array<Product>>(this.productURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
   }
   getOutOfStockProducts(): Observable<Array<Product>> {
-    return this.http.get<Array<Product>>(`${this.productURL}/outofstock`);
+    const token = localStorage.getItem('authToken'); // שליפת ה-token מ-localStorage
+    let headers = new HttpHeaders();
+    console.log("authToken",token)
+    if(token) {
+      headers = new HttpHeaders({'Authorization': `Bearer ${token}` }); // הוספת ה-token לכותרת Authorization
+   console.log("headers",headers)
+    }
+   
+    return this.http.get<Array<Product>>(`${this.productURL}/outofstock`,{headers})//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע;
   }
   //פונקציה שמקבלת מספר ומחזירה מוצר מסוים
   getProductByID(productId:number): Observable<Product>{
@@ -27,7 +35,14 @@ export class ProductService {
     return this.http.delete(`${this.productURL}/${productId}`)
   }
   editProduct(productId:Number,newProduct: Product):Observable<any>{
-  return this.http.put(`${this.productURL}/${productId}`,newProduct)
+     const token = localStorage.getItem('authToken'); // שליפת ה-token מ-localStorage
+    let headers = new HttpHeaders();
+    console.log("authToken",token)
+    if(token) {
+      headers = new HttpHeaders({'Authorization': `Bearer ${token}` }); // הוספת ה-token לכותרת Authorization
+   console.log("headers",headers)
+    }
+  return this.http.put(`${this.productURL}/${productId}`,newProduct,{headers})
 
   }
 

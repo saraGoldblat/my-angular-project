@@ -8,10 +8,12 @@ import { Subscription } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { MatIcon } from '@angular/material/icon';
 import { CartService } from '../../services/cart.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-category-products',
-  imports: [NgFor,CommonModule,RouterLink,MatIcon],
+  imports: [NgFor,CommonModule,RouterLink,MatIcon,MatMenuModule,MatButtonModule],
   templateUrl: './category-products.component.html',
   styleUrl: './category-products.component.scss'
 })
@@ -50,6 +52,13 @@ export class CategoryProductsComponent implements OnInit ,OnDestroy{
         this.products = [];
       }
     });
+  }
+    sortProducts(order: 'asc' | 'desc'): void {
+    if (order === 'asc') {
+      this.products.sort((a, b) => a.price - b.price);
+    } else {
+      this.products.sort((a, b) => b.price - a.price);
+    }
   }
 
   ngOnDestroy(): void {

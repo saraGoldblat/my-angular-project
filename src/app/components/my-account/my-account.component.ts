@@ -26,13 +26,23 @@ export class MyAccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.currentUser$.subscribe(user => {
-      if (typeof user === 'string') {
-        this.user = JSON.parse(user);
-      } else {
-        this.user = user;
-      }
-    });
+   this.userService.currentUser$.subscribe(user => {
+    if (typeof user === 'string') {
+      this.user = JSON.parse(user);
+    } else {
+      this.user = user;
+    }
+    // אם יש משתמש, נעדכן את ערכי הטופס
+    if (this.user) {
+      this.profileForm.patchValue({
+        username: this.user.username,
+        lastName: this.user.lastName,
+        phone: this.user.phone,
+        address: this.user.address,
+        email: this.user.email
+      });
+    }
+  });
   }
   saveProfile() {
     console.log("enter")

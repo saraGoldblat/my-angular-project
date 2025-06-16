@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { SaleComponent } from './components/sale/sale.component';
 import { ViewProductComponent } from './components/view-product/view-product.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,10 +15,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { adminGuard } from './guards/admin.guard';
 import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'sale', component: SaleComponent },
     { path: 'viewproduct', component: ViewProductComponent },
     {path:'register',component:RegisterComponent},
     {path: '',component:HomeComponent},
@@ -37,7 +36,8 @@ export const routes: Routes = [
   component: AdminDashboardComponent,
   // canActivate: [adminGuard]
 },
-{path:'about-us',component:AboutUsComponent}
+{path:'about-us',component:AboutUsComponent},
+{ path: 'checkout', component: CheckoutComponent }
 
 
 

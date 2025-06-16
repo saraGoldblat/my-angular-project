@@ -26,34 +26,45 @@ export class LoginComponent {
 
  onLogin(): void {
   if (this.loginForm.valid) {
+    if (this.loginForm.valid) {
     const { username, password } = this.loginForm.value;
     this.userService.getUserByNagmeAndPassword(username, password).subscribe(
       (user) => {
-        this.userService.isManager(user,password).subscribe(
+        this.userService.isManager(user, password).subscribe(
           (isManager: boolean) => {
             this.flag = isManager; // עדכון המשתנה עם התוצאה
             console.log('Is manager:', this.flag);
-            if( this.flag) {
-
-              // Change '/app-admin-dashboard' to the correct route, e.g., '/admin-dashboard'
+            if (this.flag) {
               this.router.navigate(['/admin-dashboard']);
+            } else {
+              this.userService.setCurrentUser(user); // שמירת המשתמש הנוכחי
+              localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
+              this.router.navigate(['/my-account']);
             }
           },
           (error) => {
-            if (user) {
-              this.userService.setCurrentUser(user); // כאן שמירת המשתמש!
-              this.router.navigate(['/my-account']);
-            } else {
-              alert('שם משתמש או סיסמה לא נכונים');
-            }
+            // טיפול בשגיאה כאשר המשתמש אינו מנהל
+            console.error('Error checking manager status:', error);
+            this.errorMessage = 'You do not have permission to access this area.';
+            alert(this.errorMessage);
           }
         );
+      },
+      (error) => {
+        // טיפול בשגיאה כאשר שם המשתמש או הסיסמה אינם נכונים
+        console.error('Login failed:', error);
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid username or password.';
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+        alert(this.errorMessage);
       }
     );
   }
-  
 }
 
+}
 }
 
  

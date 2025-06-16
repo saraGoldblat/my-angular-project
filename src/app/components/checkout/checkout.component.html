@@ -1,0 +1,63 @@
+
+<div class="checkout-container">
+  <h2>Checkout</h2>
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="cardholderName">Cardholder Name</label>
+      <input id="cardholderName" formControlName="cardholderName" placeholder="John Doe" />
+      <div class="error" *ngIf="submitted && checkoutForm.controls['cardholderName'].errors">
+        <small *ngIf="checkoutForm.controls['cardholderName'].errors?.['required']">
+          Cardholder Name is required
+        </small>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="cardNumber">Card Number</label>
+      <input id="cardNumber" formControlName="cardNumber" placeholder="1234567812345678" />
+      <div class="error" *ngIf="submitted && checkoutForm.controls['cardNumber'].errors">
+        <small *ngIf="checkoutForm.controls['cardNumber'].errors?.['required']">
+          Card Number is required
+        </small>
+        <small *ngIf="checkoutForm.controls['cardNumber'].errors?.['pattern']">
+          Must be exactly 16 digits
+        </small>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="expirationDate">Expiration Date (MM/YY)</label>
+      <input id="expirationDate" formControlName="expirationDate" placeholder="MM/YY" />
+      <div class="error" *ngIf="submitted && checkoutForm.controls['expirationDate'].errors">
+        <small *ngIf="checkoutForm.controls['expirationDate'].errors?.['required']">
+          Expiration Date is required
+        </small>
+        <small *ngIf="checkoutForm.controls['expirationDate'].errors?.['pattern']">
+          Invalid format (MM/YY)
+        </small>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="cvv">CVV</label>
+      <input id="cvv" formControlName="cvv" placeholder="123" />
+      <div class="error" *ngIf="submitted && checkoutForm.controls['cvv'].errors">
+        <small *ngIf="checkoutForm.controls['cvv'].errors?.['required']">
+          CVV is required
+        </small>
+        <small *ngIf="checkoutForm.controls['cvv'].errors?.['pattern']">
+          Must be exactly 3 digits
+        </small>
+      </div>
+    </div>
+
+    <button type="submit">Pay Now</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="paymentSuccess" class="success-message">
+    Payment Successful! Thank you for your purchase.
+  </div>
+</div>
