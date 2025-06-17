@@ -16,5 +16,5 @@ import { TestComponentComponent } from "./components/test-component/test-compone
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'my-angular-project';
+  title = 'Goldblat-Diamonds';
 }
