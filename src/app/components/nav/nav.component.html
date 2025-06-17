@@ -3,23 +3,40 @@
   <div class="logo">Goldblat Diamonds</div>
   <div class="spacer"></div>
 
-   <div *ngIf="user" class="greeting" style="display: flex; align-items: center;">
-    <mat-icon style="margin-right: 5px; color: #fdd835;">sentiment_satisfied</mat-icon>
- <span>Hello, {{ displayedUsername }}</span>
-  </div>
-
-  <div class="icons">
-    
-    <button mat-icon-button (click)="goToAccount()" aria-label="Account">
+  <div *ngIf="user; else guest" class="icons">
+    <!-- כפתור המשתמש עם mat-menu trigger -->
+    <button mat-icon-button class="person-button" 
+            [matMenuTriggerFor]="accountMenu" 
+            aria-label="Account">
       <mat-icon>person</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/cart" aria-label="Cart">
+
+    <!-- תפריט המשתמש -->
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item routerLink="/my-account">My Account</button>
+      <button mat-menu-item routerLink="/order-history">My Orders</button>
+      <button mat-menu-item (click)="onLogout()">Logout</button>
+    </mat-menu>
+
+    <button mat-icon-button routerLink="/cart" aria-label="Cart" class="cart-button">
       <mat-icon>shopping_cart</mat-icon>
     </button>
   </div>
+
+  <ng-template #guest>
+    <div class="icons">
+      <button mat-icon-button class="person-button" routerLink="/login" aria-label="Login">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button class="cart-button" routerLink="/cart" aria-label="Cart">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
+  </ng-template>
 </mat-toolbar>
 
 <nav class="main-nav">
+  <!-- שאר התפריט כפי שקיים -->
   <div class="dropdown">
     <button mat-icon-button class="dropbtn" >Jewelry</button>
     <div class="dropdown-content">
@@ -32,5 +49,4 @@
   <a class="nav-link" routerLink="/category/diamonds">Diamonds</a>
   <a class="nav-link" routerLink="/category/engagement">Engagement</a>
   <a class="nav-link" routerLink="/about-us">about us</a>
- 
 </nav>

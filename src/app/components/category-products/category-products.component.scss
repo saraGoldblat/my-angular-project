@@ -1,3 +1,23 @@
+.sort-buttons {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter-button {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #fff;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  &:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-color: #000;
+  }
+}
+
 .product-cards {
   display: flex;
   flex-wrap: wrap;
@@ -33,20 +53,20 @@
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
-    min-height: 120px;  // עדכון גובה מינימלי למידה נוחה
+    min-height: 120px;
     padding: 0 8px;
   }
   
   .product-name {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 6px;
-  white-space: normal;
-  word-wrap: break-word;
-  line-height: 1.3;
-  direction: ltr;
-  text-align: left;
-}
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.3;
+    direction: ltr;
+    text-align: left;
+  }
     
   .price-cart {
     display: flex;

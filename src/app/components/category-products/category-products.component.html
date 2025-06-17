@@ -1,11 +1,10 @@
 <div class="sort-buttons">
-  <button mat-button [matMenuTriggerFor]="sortMenu">Sort by</button>
+  <button mat-button class="filter-button" [matMenuTriggerFor]="sortMenu">Sort by price</button>
   <mat-menu #sortMenu="matMenu">
     <button mat-menu-item (click)="sortProducts('asc')">Low to High</button>
     <button mat-menu-item (click)="sortProducts('desc')">High to Low</button>
   </mat-menu>
 </div>
-
 
 
 <div class="product-cards">

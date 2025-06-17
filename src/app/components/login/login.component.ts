@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,
      private userService: UserService,
-    private router: Router) {
+    private router: Router,
+  private cartService: CartService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(2)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -41,7 +43,12 @@ export class LoginComponent {
                localStorage.setItem('isAdmin','false');
               this.userService.setCurrentUser(user); // שמירת המשתמש הנוכחי
               localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
-              this.router.navigate(['/my-account']);
+            const cartItems = this.cartService.getCart();
+                if (cartItems && cartItems.length > 0) {
+                  this.router.navigate(['/checkout']);
+                } else {
+                  this.router.navigate(['/']);
+                }
             }
           },
           (error) => {

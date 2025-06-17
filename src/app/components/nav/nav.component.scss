@@ -103,3 +103,32 @@
   padding: 0;
   cursor: pointer;
 }
+.person-button {
+  background-color: transparent !important;
+  border: 1px solid #000 !important;
+  border-radius: 50%;
+  color: #fff !important;
+  padding: 8px; /* בהתאמה למראה הרצוי */
+  min-width: unset; /* להסרת המידות הסטנדרטיות של mat-icon-button */
+  width: auto;
+  height: auto;
+}
+
+/* אפשר להוסיף גם אפקט hover */
+.person-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.cart-button {
+  background-color: transparent !important;
+  border: 1px solid #000 !important;
+  border-radius: 50%;
+  color: #fff !important;
+  padding: 8px;
+  min-width: unset;
+  width: auto;
+  height: auto;
+}
+
+.cart-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,34 +1,61 @@
-<!-- חלק מה-my-account.component.html -->
-<h2>My Profile</h2>
+<div class="my-account-container">
+  <h2>My Profile</h2>
 
-<form [formGroup]="profileForm">
-  <div class="form-field">
-    <label for="username">Username</label>
-    <input formControlName="username" id="username" />
-  </div>
-  <div class="form-field">
-    <label for="lastName">Last Name</label>
-    <input formControlName="lastName" id="lastName" />
-  </div>
-  <div class="form-field">
-    <label for="phone">Phone</label>
-    <input formControlName="phone" id="phone" />
-  </div>
-  <div class="form-field">
-    <label for="address">Address</label>
-    <input formControlName="address" id="address" />
-  </div>
-  <div class="form-field">
-    <label for="email">Email</label>
-    <input formControlName="email" id="email" />
+  <!-- מצב צפייה בפרטים (לא ניתן עריכה) -->  
+  <div *ngIf="!editMode">
+    <div class="detail-field">
+      <label>Username: </label>
+      <span>{{ user?.username }}</span>
+    </div>
+    <div class="detail-field">
+      <label>Last Name: </label>
+      <span>{{ user?.lastName }}</span>
+    </div>
+    <div class="detail-field">
+      <label>Phone: </label>
+      <span>{{ user?.phone }}</span>
+    </div>
+    <div class="detail-field">
+      <label>Address: </label>
+      <span>{{ user?.address }}</span>
+    </div>
+    <div class="detail-field">
+      <label>Email: </label>
+      <span>{{ user?.email }}</span>
+    </div>
+    <div class="buttons-container">
+      <button type="button" class="edit-button" (click)="enableEdit()">Edit Profile</button>
+      <button type="button" class="logout-button" (click)="logout()">Logout</button>
+    </div>
   </div>
 
-  <div class="buttons-container">
-    <button type="button" class="save-button" (click)="saveProfile()">Save</button>
-    <button type="button" class="logout-button" (click)="logout()">Logout</button>
+  <!-- מצב עריכה: טופס לעריכת הפרטים -->
+  <div *ngIf="editMode">
+    <form [formGroup]="profileForm">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input formControlName="username" id="username" />
+      </div>
+      <div class="form-field">
+        <label for="lastName">Last Name</label>
+        <input formControlName="lastName" id="lastName" />
+      </div>
+      <div class="form-field">
+        <label for="phone">Phone</label>
+        <input formControlName="phone" id="phone" />
+      </div>
+      <div class="form-field">
+        <label for="address">Address</label>
+        <input formControlName="address" id="address" />
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" />
+      </div>
+      <div class="buttons-container">
+        <button type="button" class="save-button" (click)="saveProfile()">Save</button>
+        <button type="button" class="cancel-button" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
   </div>
-</form>
-
-<div class="extra-links">
-  <a routerLink="/order-history">View Order History</a>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../classes/product';
@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class CategoryProductsComponent implements OnInit ,OnDestroy{
   products: Product[] = [];
   categoryName: string = '';
+ 
   private subscription:Subscription=new Subscription(); //מנוי חדש
   constructor(
     private route: ActivatedRoute,
