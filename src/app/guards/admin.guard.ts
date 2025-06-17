@@ -1,16 +1,14 @@
+import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { catchError, of, switchMap } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
- console.log('Admin Guard Activated');
-   const token = localStorage.getItem('jwt');
-   console.log('Token:', token); // הדפסת הטוקן לבדיקה
-  if (token) {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    if (payload['role'] === 'manager') {
-      return true;
-    }
+ const isAdmin = localStorage.getItem('isAdmin');
+  if (isAdmin === 'true') {
+    return of(true);
+  } else {
+    // במידה ולא מנהל, ניתן לנתב לדף התחברות או להראות הודעת שגיאה
+    return of(false);
   }
-  // אפשר גם לנתב ל-login:
-  window.location.href = '/register';
-  return false;
-  };
+};

@@ -67,5 +67,12 @@ ifUser:boolean = false
     this.router.navigate(['/login']);
   }
 }
+// בתוך NavComponent, הוסיפי את ה-getter:
+get displayedUsername(): string {
+  if (this.user && this.user.username === 'aaa') {
+    return 'admin';
+  }
+  return this.user ? this.user.username : '';
+}
 
 }

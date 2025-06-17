@@ -1,65 +1,71 @@
 .product-cards {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 20px;
   justify-content: center;
-  padding: 30px 0;
 }
 
 .product-card {
-  width: 320px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  overflow: hidden;
+  width: 220px;
+  background: transparent;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.2s, transform 0.2s;
-  cursor: pointer;
+  justify-content: space-between;
+  box-shadow: none;
+  text-align: center;
 
-  &:hover {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    transform: translateY(-4px) scale(1.02);
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    min-height: 120px;  // עדכון גובה מינימלי למידה נוחה
+    padding: 0 8px;
+  }
+  
+  .product-name {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.3;
+  direction: ltr;
+  text-align: left;
 }
-
-.product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  background: #f5f5f5;
-}
-
-.product-info {
-  padding: 16px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.product-name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0 8px 0;
-  color: #333;
-}
-
-.product-description {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 12px;
-  min-height: 48px;
-}
-
-.product-price {
-  font-size: 1.1rem;
-  color: #1976d2;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-button[mat-icon-button] {
-  align-self: flex-end;
+    
+  .price-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #333;
+    margin-top: auto;
+  }
+    
+  .add-to-cart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #000;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -3,7 +3,6 @@ import { Product } from '../../classes/product';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,23 +11,25 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ProductFormDialogComponent } from '../components/product-form-dialog/product-form-dialog.component';
 import { Category } from '../../classes/category';
 import { CategoryService } from '../../services/category.service';
-import { ThisReceiver } from '@angular/compiler';
+import { MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-product-management',
-  imports: [NgIf,NgFor,FormsModule,NgClass,CommonModule,ReactiveFormsModule,  MatButtonModule,
-    MatFormFieldModule, MatInputModule, MatDialogModule],
+  imports: [NgIf, NgFor, FormsModule, NgClass, CommonModule, ReactiveFormsModule, MatButtonModule,
+    MatFormFieldModule, MatInputModule, MatDialogModule,MatSelect,MatOption],
   templateUrl: './product-management.component.html',
   styleUrl: './product-management.component.scss'
 })
 export class ProductManagementComponent implements OnInit {
   products: Product[] = [];
+  allProducts: Product[] = [];   // משתנה חדש לשמירת כל המוצרים
+  categories: Category[] = [];
   showOutOfStock = false;
   productForm: FormGroup;
   editingProduct: Product | null = null;
-  showForm = false;  categories: Category[] = [];
+  showForm = false;
 
-  constructor(private dialog: MatDialog,private productService: ProductService, private fb: FormBuilder,private categoryService: CategoryService) {
+  constructor(private dialog: MatDialog, private productService: ProductService, private fb: FormBuilder, private categoryService: CategoryService) {
     this.productForm = this.fb.group({
       id: [null],
       name: [''],
@@ -47,11 +48,19 @@ export class ProductManagementComponent implements OnInit {
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(data => this.categories = data);
   }
+
   loadProducts() {
-    this.productService.getAllProducts().subscribe(data => this.products = data);
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data;
+      this.allProducts = data;
+    });
   }
+
   loadOutOfStock() {
-    this.productService.getOutOfStockProducts().subscribe(data => this.products = data);
+    this.productService.getOutOfStockProducts().subscribe(data => {
+      this.products = data;
+      this.allProducts = data;
+    });
   }
 
   toggleOutOfStock() {
@@ -59,10 +68,30 @@ export class ProductManagementComponent implements OnInit {
     this.showOutOfStock ? this.loadOutOfStock() : this.loadProducts();
   }
 
-  startEdit(product: Product) {
-    this.editingProduct = product;
-    this.productForm.patchValue(product);
+  // פונקציה לסינון לפי קטגוריה
+  filterByCategory(categoryId?: number) {
+    if (!categoryId) {
+      this.products = this.allProducts;
+    } else {
+      this.products = this.allProducts.filter(product => product.categoryId === categoryId);
+    }
   }
+
+  // פונקציה למיון לפי מחיר
+  sortProducts(order: 'asc' | 'desc' | ''): void {
+    if (order === 'asc') {
+      this.products.sort((a, b) => a.price - b.price);
+    } else if (order === 'desc') {
+      this.products.sort((a, b) => b.price - a.price);
+    }
+    // במידה ונבחר "None", ניתן לשחזר את הסדר המקורי ע"י טעינת המוצרים מחדש:
+    else {
+      this.loadProducts();
+    }
+  }
+
+  // שאר הפונקציות הקיימות (הוספה, עריכה, מחיקה) נשארות ללא שינוי.
+
   openAddProduct() {
     const dialogRef = this.dialog.open(ProductFormDialogComponent, {
       data: { product: null }

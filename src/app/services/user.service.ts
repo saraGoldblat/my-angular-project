@@ -77,49 +77,10 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
   
- 
-  // isManager(user: User): Observable<boolean> {
-  //   return this.http.post<{ Token: string }>('https://localhost:7158/api/Login',   user,
-  //   {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json'
-  //     })
-  //   }).pipe(
-    
-  //     map((response) => {
-  //       console.log("בדיקה ")
-  //       const token = response.Token; // קבלת הטוקן מהשרת
-  //       console.log("token: ",token)
-  //       localStorage.setItem('authToken', token); // שמירת הטוקן ב-localStorage
-  //       return true; // המשתמש הוא מנהל
-  //     }),
-  //     catchError((error) => {
-  //        console.error("Error occurred:", error);
-  //       if (error.status === 401) {
-  //         return [false]; // המשתמש אינו מנהל
-  //       }
-  //       throw error; // טיפול בשגיאות אחרות
-  //     })
-  //   );
-  // }
+  
    isManager(user1: User,password1:string): Observable<boolean> {
-
-  // const user: User = {
-  //   userId: 1,
-  //   username: "aaa",
-  //   password: "1234567",
-  //   lastName: "Greenfeld",
-  //   phone: "1234567565",
-  //   address: "Some Address",
-  //   email: "aaa@example.com"
-  // };
   if (typeof user1 === 'string') {
-      console.log('User is an object:', user1);
-     
-        user1 = JSON.parse(user1);
-         console.log('Parsed user:', user1.userId);
-      
-      console.log('Parsed user:', user1);
+        user1 = JSON.parse(user1);  
   }
   const user: User = {
     userId: user1.userId,
@@ -130,7 +91,6 @@ export class UserService {
     address: user1.address,
     email: user1.email
   };
-  console.log('User object:', user);  
   const url = "https://localhost:7158/api/Login";
   const headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -141,7 +101,6 @@ export class UserService {
       console.log('Full response:', response);
       console.log('Token received:', response.token);
       localStorage.setItem('authToken', response.token); // שמירת הטוקן ב-localStorage
-      alert('Login successful!');
       return true; // מחזיר true אם הבקשה הצליחה
     }),
     catchError((error) => {
@@ -150,14 +109,6 @@ export class UserService {
   );
 }
    
-
-  // isManager(user: User):boolean{
-  //   if( user.username=='aaa'&&user.password=='1234567')
-  //     return true ;
-  //   return false;
-
-  // }
-
 
 
 }

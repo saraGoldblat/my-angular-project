@@ -27,14 +27,14 @@ export const routes: Routes = [
     {path:'my-account',component:MyAccountComponent},
     {path:'user-management',component:UserManagementComponent},
     { path: 'product/:id', component: ProductDetailsComponent },
-    {path:'product-management',component:ProductManagementComponent},
+    {path:'product-management',component:ProductManagementComponent , },
     { path: 'cart', component: CartComponent },
     { path: 'order-history', component: OrderHistoryComponent },
 {path: 'test-component',component:TestComponentComponent}, // Redirect to admin-dashboard for /admin
     {
   path: 'admin-dashboard',
   component: AdminDashboardComponent,
-  // canActivate: [adminGuard]
+  canActivate: [adminGuard]
 },
 {path:'about-us',component:AboutUsComponent},
 { path: 'checkout', component: CheckoutComponent }

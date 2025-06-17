@@ -35,8 +35,10 @@ export class LoginComponent {
             this.flag = isManager; // עדכון המשתנה עם התוצאה
             console.log('Is manager:', this.flag);
             if (this.flag) {
+                localStorage.setItem('isAdmin', 'true');
               this.router.navigate(['/admin-dashboard']);
             } else {
+               localStorage.setItem('isAdmin','false');
               this.userService.setCurrentUser(user); // שמירת המשתמש הנוכחי
               localStorage.setItem('currentUser', JSON.stringify(user)); // שמירת המשתמש הנוכחי ב-localStorage
               this.router.navigate(['/my-account']);
