@@ -29,6 +29,19 @@
                    [position]="'below'">
       </app-tooltip>
     </div>
+  
+    <!-- כפתור Wish List עם Tooltip, תוך שימוש באירוע לחיצה -->
+    <div class="tooltip-container" style="position: relative; display: inline-block;"
+         (mouseenter)="showWishTooltip = true" 
+         (mouseleave)="showWishTooltip = false">
+      <button mat-icon-button class="wish-button" (click)="onWishListClick()" aria-label="Wish List">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+      <app-tooltip [text]="'Wish List'" 
+                   [isShown]="showWishTooltip" 
+                   [position]="'below'">
+      </app-tooltip>
+    </div>
   </div>
 
   <ng-template #guest>
@@ -55,6 +68,17 @@
                      [position]="'below'">
         </app-tooltip>
       </div>
+      <div class="tooltip-container" style="position: relative; display: inline-block;"
+         (mouseenter)="showWishTooltip = true" 
+         (mouseleave)="showWishTooltip = false">
+      <button mat-icon-button class="wish-button" (click)="onWishListClick()" aria-label="Wish List">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+      <app-tooltip [text]="'Wish List'" 
+                   [isShown]="showWishTooltip" 
+                   [position]="'below'">
+      </app-tooltip>
+    </div>
     </div>
   </ng-template>
 </mat-toolbar>

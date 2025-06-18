@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { LoginComponent } from "../login/login.component";
 import { User } from '../../classes/user';
@@ -20,8 +20,12 @@ export class NavComponent implements OnInit {
   user: User | null = null;
   name: string = ''; // משתנה לאחסון שם המשתמש
 
+  @Output() wishListClicked: EventEmitter<void> = new EventEmitter<void>();
+
   showTooltip: boolean = false;
   showCartTooltip: boolean = false;
+  showWishTooltip: boolean = false;
+
 
 
   constructor(public userService: UserService, private router: Router) { }
@@ -31,6 +35,7 @@ export class NavComponent implements OnInit {
         this.ifUser = false
       else
         this.ifUser = true;
+
     })
 
 
@@ -59,6 +64,9 @@ export class NavComponent implements OnInit {
     });
 
   }
+  onWishListClick(): void {
+    this.wishListClicked.emit();
+  }
 
   goToAccount() {
     const token = localStorage.getItem('authToken');
@@ -80,9 +88,9 @@ export class NavComponent implements OnInit {
     }
     return this.user ? this.user.username : '';
   }
-   onLogout(): void {
+  onLogout(): void {
     // טיפול בהתנתקות – למשל לשדר אירוע ולהפנות לדף כניסה
-     localStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
     window.location.reload();
     window.location.href = '/';

@@ -6,7 +6,6 @@
   </mat-menu>
 </div>
 
-
 <div class="product-cards">
   <div class="product-card" *ngFor="let product of products">
     <a class="product-link" [routerLink]="['/product', product.id]">
@@ -18,8 +17,17 @@
           <button class="add-to-cart" (click)="addToCart(product)">
             <mat-icon>add_shopping_cart</mat-icon>
           </button>
+          <!-- כפתור לב להוספה ל-Wish List -->
+          <button class="wish-icon-btn" (click)="addToWishList(product)" aria-label="Add to Wish List">
+            <mat-icon>favorite_border</mat-icon>
+          </button>
         </div>
       </div>
     </a>
   </div>
+</div>
+
+<!-- הודעת עדכון קטנה -->
+<div *ngIf="wishListMessage" class="wish-list-message">
+  {{ wishListMessage }}
 </div>

@@ -1,0 +1,25 @@
+
+<div class="wish-list">
+  <div class="header">
+    <h2>Wish List</h2>
+    <!-- כפתור לסגירה -->
+    <button class="close-btn" (click)="onClose()" aria-label="Close Wish List">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="wishList.length === 0">
+    No products in Wish List.
+  </div>
+  <ul>
+    <li *ngFor="let product of wishList">
+      <div class="product-details">
+        <img [src]="product.imageSrc" [alt]="product.name" class="product-thumb">
+        <div class="info">
+          <span class="name">{{ product.name }}</span>
+          <span class="price">{{ product.price | number:'1.0-2' }}$</span>
+          <span class="description">{{ product.description }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

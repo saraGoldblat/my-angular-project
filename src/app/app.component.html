@@ -1,5 +1,23 @@
-<app-nav> </app-nav> 
+<!-- <app-nav> </app-nav> 
  <router-outlet></router-outlet>
+ -->
+
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- הסיידנו – מוצג מימין ומסתיר את רשימת המשאלות כברירת מחדל -->
+  <mat-sidenav #wishSidenav mode="side" position="end" [opened]="false">
+    <app-wish-list (closeWishList)="toggleWishSidenav()"></app-wish-list>
+  </mat-sidenav>
+  
+  <!-- התוכן הראשי -->
+  <mat-sidenav-content>
+    <!-- NavComponent כולל כפתור לפתיחת רשימת המשאלות -->
+    <app-nav (wishListClicked)="toggleWishSidenav()"></app-nav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
 
 <!-- <app-home></app-home> -->
  <!-- <app-view-product></app-view-product> -->

@@ -132,3 +132,19 @@
 .cart-button:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+.wish-button {
+  background-color: transparent !important;
+  border: 1px solid #000 !important;
+  border-radius: 50%;
+  color: #fff !important;
+  padding: 8px; /* להתאמה למראה הרצוי */
+  min-width: unset;
+  width: auto;
+  height: auto;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.wish-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
