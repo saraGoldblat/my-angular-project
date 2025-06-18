@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -37,4 +39,8 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addToCart(product);
     alert('Product added to cart!');
   }
+   goBack(): void {
+    this.location.back();
+  }
+
 }

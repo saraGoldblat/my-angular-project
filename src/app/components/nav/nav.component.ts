@@ -7,10 +7,11 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { TooltipComponent } from "../tooltip/tooltip.component";
 
 @Component({
   selector: 'app-nav',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, CommonModule, MatMenu, MatToolbar, MatIcon, MatMenuModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, CommonModule, MatMenu, MatToolbar, MatIcon, MatMenuModule, TooltipComponent],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
@@ -18,6 +19,11 @@ export class NavComponent implements OnInit {
   ifUser: boolean = false
   user: User | null = null;
   name: string = ''; // משתנה לאחסון שם המשתמש
+
+  showTooltip: boolean = false;
+  showCartTooltip: boolean = false;
+
+
   constructor(public userService: UserService, private router: Router) { }
   ngOnInit() {
     this.userService.currentUserSubject.subscribe((userData) => {
@@ -76,9 +82,10 @@ export class NavComponent implements OnInit {
   }
    onLogout(): void {
     // טיפול בהתנתקות – למשל לשדר אירוע ולהפנות לדף כניסה
+     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);
+    window.location.reload();
+    window.location.href = '/';
   }
 
 }

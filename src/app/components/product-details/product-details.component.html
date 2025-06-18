@@ -1,13 +1,21 @@
+<!-- ניתן למקם את כפתור החזרה במקום הרצוי בתבנית -->
+<button mat-button class="back-button" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
+  Back
+</button>
+
 <div class="product-details-container">
-    <div class="image-section">
-      <img [src]="product?.imageSrc" [alt]="product?.name" class="big-image" />
-    </div>
-    <div class="info-section">
-      <h2 class="product-name">{{ product?.name }}</h2>
-      <p class="product-description">{{ product?.description }}</p>
-      <p class="product-price">{{ product?.price | number:'1.0-2' }}&#36; USD</p>
-      <button class="add-to-cart-btn" (click)="addToCart(product!)">
-        Add to Cart
-      </button>
-    </div>
+  <div class="image-section">
+    <img [src]="product?.imageSrc" [alt]="product?.name" class="big-image" />
   </div>
+  <div class="info-section">
+    <h2 class="product-name">{{ product?.name }}</h2>
+    <p class="product-description">{{ product?.description }}</p>
+    <p class="product-price">{{ product?.price | number:'1.0-2' }}&#36; USD</p>
+    <button class="add-to-cart-btn" (click)="addToCart(product)">
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+
