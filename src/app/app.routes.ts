@@ -16,29 +16,31 @@ import { adminGuard } from './guards/admin.guard';
 import { TestComponentComponent } from './components/test-component/test-component.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'viewproduct', component: ViewProductComponent },
-    {path:'register',component:RegisterComponent},
-    {path: '',component:HomeComponent},
-    { path: 'category/:name', component: CategoryProductsComponent },
-    {path: 'categor-management', component:CategoryManagementComponent}, // Redirect to home for any unknown routes
-    {path:'my-account',component:MyAccountComponent},
-    {path:'user-management',component:UserManagementComponent},
-    { path: 'product/:id', component: ProductDetailsComponent },
-    {path:'product-management',component:ProductManagementComponent , },
-    { path: 'cart', component: CartComponent },
-    { path: 'order-history', component: OrderHistoryComponent },
-{path: 'test-component',component:TestComponentComponent}, // Redirect to admin-dashboard for /admin
-    {
-  path: 'admin-dashboard',
-  component: AdminDashboardComponent,
-  canActivate: [adminGuard]
-},
-{path:'about-us',component:AboutUsComponent},
-{ path: 'checkout', component: CheckoutComponent },
-{ path: 'checkout', component: CheckoutComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'viewproduct', component: ViewProductComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomeComponent },
+  { path: 'category/:name', component: CategoryProductsComponent },
+  { path: 'categor-management', component: CategoryManagementComponent }, // Redirect to home for any unknown routes
+  { path: 'my-account', component: MyAccountComponent },
+  { path: 'user-management', component: UserManagementComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'product-management', component: ProductManagementComponent, },
+  { path: 'cart', component: CartComponent },
+  { path: 'order-history', component: OrderHistoryComponent },
+  { path: 'test-component', component: TestComponentComponent }, // Redirect to admin-dashboard for /admin
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [adminGuard]
+  },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: '**', component: NotFoundComponent } // נתיב fallback
 
 
 

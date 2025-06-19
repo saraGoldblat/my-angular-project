@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { User } from '../../classes/user';
 import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule,  ReactiveFormsModule,RouterLink],
+  imports: [CommonModule,FormsModule,  ReactiveFormsModule,RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

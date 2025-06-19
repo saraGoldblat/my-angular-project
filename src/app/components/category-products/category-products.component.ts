@@ -12,10 +12,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { WishListService } from '../../services/wish-list.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { ProductFilterPipe } from '../../pipes/product-filter.pipe';
+import { CoolEffectDirective } from '../../directives/cool-effect.directive';
 
 @Component({
   selector: 'app-category-products',
-  imports: [NgFor, CommonModule, RouterLink, MatIcon, MatMenuModule, MatButtonModule],
+  imports: [NgFor, CommonModule, RouterLink, MatIcon, MatMenuModule, MatButtonModule, MatLabel, MatFormField, FormsModule, ProductFilterPipe,CoolEffectDirective],
   templateUrl: './category-products.component.html',
   styleUrl: './category-products.component.scss'
 })
@@ -23,8 +27,10 @@ export class CategoryProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   categoryName: string = '';
   wishListMessage: string = '';
-   @Input() productsWishList: Product[] = [];
-  
+  selectedProductId: number | null = null;
+  @Input() productsWishList: Product[] = [];
+  searchText: string = ''; // משתנה לחיפוש
+  showSearch: boolean = false; // בוליאני לשליטה בהצגת שדה החיפוש  
   private subscription: Subscription = new Subscription();
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +38,7 @@ export class CategoryProductsComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private cartService: CartService,
     private wishListService: WishListService,
-     private snackBar: MatSnackBar 
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +78,12 @@ export class CategoryProductsComponent implements OnInit, OnDestroy {
     } else {
       this.products.sort((a, b) => b.price - a.price);
     }
+  }
+   toggleSearch(): void {
+    this.showSearch = !this.showSearch;
+  }
+  trackByProduct(index: number, product: Product): number {
+    return product.id;
   }
 
   ngOnDestroy(): void {

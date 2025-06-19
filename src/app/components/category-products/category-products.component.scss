@@ -1,3 +1,9 @@
+/* מבטיח שכל הדף יהיה רק לבן ממש */
+:host {
+  background-color: #ffffff;
+}
+
+/* עיצוב כפתור הסינון */
 .sort-buttons {
   margin-bottom: 15px;
   display: flex;
@@ -5,19 +11,42 @@
 }
 
 .filter-button {
-  background-color: #000 !important;
-  color: #fff !important;
-  border: 1px solid #fff;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff;
   padding: 8px 16px;
   transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: #fff !important;
-    color: #000 !important;
-    border-color: #000;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000;
   }
 }
 
+/* שורת הכלים – relative כדי שהתיבה תופיע מעל התוכן */
+.toolbar {
+  position: relative;
+}
+
+/* תיבת החיפוש מוצגת כחלונית overlay, עם רקע לבן ממש */
+.search-container {
+  position: absolute;
+  top: 50px; /* להתאמה מתחת לשורת הכלים */
+  left: 15px;
+  width: 300px;
+  background: #ffffff;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.search-field {
+  width: 100%;
+}
+
+/* עיצוב כרטיסי המוצרים */
 .product-cards {
   display: flex;
   flex-wrap: wrap;
@@ -73,7 +102,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 16px;
-    color: #333;
+    color: #333333;
     margin-top: auto;
   }
 
@@ -82,34 +111,73 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    color: #000;
+    color: #000000;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-.wish-icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: #000; /* משנה את הצבע לשחור */
-  font-size: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  transition: transform 0.2s ease;
-}
 
-.wish-icon-btn:hover {
-  transform: scale(1.1);
-}
+  .wish-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #000000;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .wish-icon-btn:hover {
+    transform: scale(1.1);
+  }
 }
 
 .wish-list-message {
   text-align: center;
   margin-top: 15px;
   font-size: 14px;
-  color: #388E3C;
+  color: #388e3c;
+}
+
+.selected {
+  border: 2px solid rgb(224, 224, 224);
+}
+/* עיצוב תיבת החיפוש כחלונית overlay קטנה ועצמאית */
+.search-container {
+  position: absolute;
+  top: 50px; /* התאימי לפי הצורך */
+  left: 15px;
+  width: 300px;
+  background: #ffffff; /* לבן ממש */
+  padding: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+/* עיצוב שדה החיפוש */
+.search-field {
+  width: 100%;
+}
+
+/* כפתור סגירה קטן, במיקום עליון ימני בתוך החלונית */
+.close-search {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
 }

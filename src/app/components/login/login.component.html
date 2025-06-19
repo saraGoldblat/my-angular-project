@@ -1,16 +1,30 @@
-<p>login works!</p>
+
 <div class="login-container">
-    <h1>Login</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
-      <div class="form-group">
-        <input type="text" formControlName="username" placeholder="First Name" />
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+    <div class="form-group">
+      <input type="text" 
+             formControlName="username" 
+             placeholder="First Name"
+             [ngStyle]="{'border': (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) ? '2px solid red' : '1px solid #ccc'}" />
+      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" 
+           style="color: red; font-size: 12px;">
+        Username must be at least 2 characters.
       </div>
-      <div class="form-group">
-        <input type="password" formControlName="password" placeholder="Password" />
-      </div>
-      <button type="submit" class="btn-login" [disabled]="!loginForm.valid">Login</button>
-    </form>
-    <div class="create-account">
-      <p>Don't have an account? <a routerLink="/register">Register</a></p>
     </div>
+    <div class="form-group">
+      <input type="password" 
+             formControlName="password" 
+             placeholder="Password"
+             [ngStyle]="{'border': (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) ? '2px solid red' : '1px solid #ccc'}" />
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" 
+           style="color: red; font-size: 12px;">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+    <button type="submit" class="btn-login" [disabled]="!loginForm.valid">Login</button>
+  </form>
+  <div class="create-account">
+    <p>Don't have an account? <a routerLink="/register">Register</a></p>
   </div>
+</div>

@@ -26,6 +26,9 @@ export class NavComponent implements OnInit {
   showCartTooltip: boolean = false;
   showWishTooltip: boolean = false;
 
+  searchText: string = '';
+  showSearch: boolean = false;
+
 
 
   constructor(public userService: UserService, private router: Router) { }
@@ -94,6 +97,9 @@ export class NavComponent implements OnInit {
     localStorage.removeItem('currentUser');
     window.location.reload();
     window.location.href = '/';
+  }
+   toggleSearch(): void {
+    this.showSearch = !this.showSearch;
   }
 
 }
