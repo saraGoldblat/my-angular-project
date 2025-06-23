@@ -29,6 +29,7 @@ export class NavComponent implements OnInit {
   searchText: string = '';
   showSearch: boolean = false;
 
+  isAdmin: boolean = false; // משתנה לבדיקת אם המשתמש הוא אדמין
 
 
   constructor(public userService: UserService, private router: Router) { }
@@ -74,9 +75,8 @@ export class NavComponent implements OnInit {
   goToAccount() {
     const token = localStorage.getItem('authToken');
     if (token) {
-
       this.router.navigate(['/admin-dashboard']);
-
+      this.isAdmin=true;
     }
     else if (this.user) {
       this.router.navigate(['/my-account']);
@@ -84,6 +84,7 @@ export class NavComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  
   // בתוך NavComponent, הוסיפי את ה-getter:
   get displayedUsername(): string {
     if (this.user && this.user.username === 'aaa') {

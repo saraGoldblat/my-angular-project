@@ -1,0 +1,33 @@
+.admin-orders {
+  padding: 16px;
+  max-width: 800px;
+  margin: auto;
+
+  h2 {
+    margin-bottom: 12px;
+  }
+  .loading, .no-data {
+    font-style: italic;
+    color: #666;
+    margin: 8px 0;
+  }
+  .error {
+    color: #c00;
+    margin: 8px 0;
+  }
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    thead {
+      background: #f0f0f0;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    th {
+      text-align: left;
+      font-weight: bold;
+    }
+  }
+}

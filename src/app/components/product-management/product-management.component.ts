@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { ProductFormDialogComponent } from '../components/product-form-dialog/product-form-dialog.component';
 import { Category } from '../../classes/category';
 import { CategoryService } from '../../services/category.service';
@@ -102,6 +101,7 @@ export class ProductManagementComponent implements OnInit {
         // ודאי שהקטגוריה נשלחת בפורמט הנכון
         const category = this.categories.find(c => c.id === result.categoryId);
         result.category = category;
+        result.id=0;
   
         console.log('Product to add:', result); // בדקי מה נשלח לשרת
         this.productService.addProduct(result).subscribe({
@@ -121,7 +121,11 @@ export class ProductManagementComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.productService.editProduct(product.id, result).subscribe(() => this.loadProducts());
+        this.productService.editProduct(product.id, result).subscribe({   next: () => this.loadProducts(),
+          error: error => {
+            console.error('Error adding product:', error); // הצגת שגיאה בקונסול
+            alert('Failed to add product. Please check the data and try again.');
+          }});
       }
     });
   }
@@ -162,7 +166,16 @@ export class ProductManagementComponent implements OnInit {
     }
   }
   deleteProduct(id: number) {
-    this.productService.deleteProduct(id).subscribe(() => this.loadProducts());
+    if (!confirm('Are you sure you want to delete this product?')) {
+      return;
+    }
+    this.productService.deleteProduct(id).subscribe({
+    next: () => this.loadProducts(),
+    error: err => {
+      console.error('Error deleting product:', err);
+      alert(`Failed to delete product (${err.status}). Check console/Network tab.`);
+    }
+  });
   }
 
   cancelEdit() {

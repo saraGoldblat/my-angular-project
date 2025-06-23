@@ -11,23 +11,73 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* filepath: src/app/components/nav/nav.component.scss */
 .logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 1px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 12px;
+  user-select: none;
+
+  .logo-img {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    background: #fff;
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+
+  .logo-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: color 0.2s;
+  }
 }
 
+.logo:hover .logo-img {
+  transform: scale(1.08) rotate(-8deg);
+}
+
+/* אם יש לך עדיין .spacer, אפשר לאפס אותו: */
 .spacer {
-  flex: 1;
+  flex: none;
+  width: 0;
 }
-
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1050; /* <-- שינוי כאן: ערך גבוה יותר מ-z-index של הכרטיסיות */
+  border: 1px solid #ddd;
+}
 .icons button {
   color: #fff;
   margin-left: 1rem;
   font-size: 1.5rem;
   transition: transform 0.2s ease, color 0.2s ease;
+}
+.icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.welcome-message {
+  color: inherit; // יורש את צבע הטקסט מה-toolbar
+  font-size: 1rem;
+  margin-right: 12px; // יוצר רווח בין ההודעה לאייקון הראשון
+  white-space: nowrap; // מונע מהטקסט לרדת שורה
 }
 
 .icons button:hover {
@@ -147,4 +197,27 @@
 .wish-button:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
+}
+.logo {
+  display: flex;
+  align-items: center;
+
+ .logo-text {
+  font-family: 'Playfair Display', 'Roboto', serif;
+  font-size: 2rem;
+  margin-left: 12px;
+  color: #ffffff; // זהב עדין
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.10), 0 0 4px #fff8e1;
+  text-transform: uppercase;
+  /* אפקט מעבר */
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.logo-text::first-letter {
+  font-size: 2.5rem;
+  color: #ffffff; // זהב חזק יותר
+  text-shadow: 0 0 8px #fffde7;
+}
 }

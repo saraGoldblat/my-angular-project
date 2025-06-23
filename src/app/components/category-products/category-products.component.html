@@ -1,4 +1,4 @@
-<div class="toolbar" style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 15px;">
+<div class="toolbar">
   <div class="sort-buttons">
     <button mat-button class="filter-button" [matMenuTriggerFor]="sortMenu">
       Sort by price
@@ -7,9 +7,9 @@
       <button mat-menu-item (click)="sortProducts('asc')">Low to High</button>
       <button mat-menu-item (click)="sortProducts('desc')">High to Low</button>
     </mat-menu>
-  </div>
-  <div style="margin-left: 10px;">
-    <button mat-icon-button (click)="toggleSearch()" aria-label="Toggle Search">
+
+    <!-- כפתור חיפוש מיושר בתוך אותה שורה -->
+    <button mat-icon-button class="search-button" (click)="toggleSearch()" aria-label="Toggle Search">
       <mat-icon>search</mat-icon>
     </button>
   </div>

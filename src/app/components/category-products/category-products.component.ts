@@ -62,7 +62,10 @@ export class CategoryProductsComponent implements OnInit, OnDestroy {
       next: category => {
         const categoryId = category.id;
         this.subscription = this.productService.getProductsByCategory(categoryId).subscribe({
-          next: products => this.products = products,
+          next: products => {
+            // סינון המוצרים כך שרק מוצרים עם מלאי גדול מ-0 יוצגו
+            this.products = products.filter(product => product.stockQuantity > 0);
+          },
           error: err => console.error('Failed loading products', err)
         });
       },

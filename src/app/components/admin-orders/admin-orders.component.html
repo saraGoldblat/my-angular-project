@@ -1,1 +1,28 @@
-<p>admin-orders works!</p>
+<div class="admin-orders">
+  <h2>All Orders</h2>
+
+  <div *ngIf="loading" class="loading">Loading orders…</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+  <table *ngIf="!loading && allOrders.length" class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of allOrders">
+        <td>{{ o.orderId }}</td>
+        <td>{{ o.orderDate | date:'short' }}</td>
+        <td>{{ o.user.username }} {{o.user.lastName}} ID {{o.userId}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !allOrders.length" class="no-data">
+    No orders found.
+  </div>
+</div>

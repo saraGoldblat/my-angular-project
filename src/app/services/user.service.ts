@@ -22,12 +22,19 @@ export class UserService {
       this.currentUserSubject.next(JSON.parse(savedUser));
    }
    }
-  getAllUsers():Observable<Array<User>>
-  {
+  private authHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+    return token
+      ? new HttpHeaders({ 'Authorization': `Bearer ${token}` })
+      : new HttpHeaders();
+  }
 
-  
-    return this.http.get<Array<User>>(this.userURL)//נפתח צינו של הבקשה וברגע שהי אתגיע נפתח PULSE של מידע 
-  } 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(
+      this.userURL,
+      { headers: this.authHeaders() }
+    );
+  }
 
   getUserByID(userId:number): Observable<User>{
     return this.http.get<User>(`${this.userURL}/${userId}`,{responseType:'text' as 'json'})

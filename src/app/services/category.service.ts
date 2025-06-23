@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Category } from '../classes/category';
 import { Observable } from 'rxjs';
@@ -10,6 +10,14 @@ export class CategoryService {
   private categoryURL: string = 'https://localhost:7158/api/Category';
 
   constructor(private http: HttpClient) {}
+
+   private authHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+    return token
+      ? new HttpHeaders({ 'Authorization': `Bearer ${token}` })
+      : new HttpHeaders();
+  }
+
 
   // מביא את כל הקטגוריות
   getAllCategories(): Observable<Category[]> {
@@ -28,17 +36,27 @@ export class CategoryService {
 
   // הוספת קטגוריה חדשה
   addCategory(category: Category): Observable<any> {
-    return this.http.post(this.categoryURL, category);
+    return this.http.post(
+      this.categoryURL,
+      category,
+      { headers: this.authHeaders() }
+    );
   }
 
   // עדכון קטגוריה קיימת
   updateCategory(category: Category): Observable<any> {
-    return this.http.put(`${this.categoryURL}/${category.id}`, category);
+    return this.http.put(
+      `${this.categoryURL}/${category.id}`,
+      category,
+      { headers: this.authHeaders() }
+    );
   }
 
   // מחיקת קטגוריה לפי מזהה
   deleteCategory(id: number): Observable<any> {
-    return this.http.delete(`${this.categoryURL}/${id}`);
+    return this.http.delete(`${this.categoryURL}/${id}`, {
+      headers: this.authHeaders()
+    });
   }
 }
 

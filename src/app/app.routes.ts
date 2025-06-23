@@ -17,6 +17,7 @@ import { TestComponentComponent } from './components/test-component/test-compone
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,7 +40,8 @@ export const routes: Routes = [
   },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  { path: 'order-history', component: OrderHistoryComponent },
+  {path: 'admin-orders', component: AdminOrdersComponent },
   { path: '**', component: NotFoundComponent } // נתיב fallback
 
 

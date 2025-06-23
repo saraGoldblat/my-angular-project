@@ -9,9 +9,10 @@ export class CoolEffectDirective {
 
   @HostListener('mouseenter') onMouseEnter() {
     // מגדיל את האלמנט ומוסיף הצללה
-    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.05)');
-    this.renderer.setStyle(this.el.nativeElement, 'transition', 'transform 0.3s ease');
-    this.renderer.setStyle(this.el.nativeElement, 'box-shadow', '0 4px 8px rgba(0,0,0,0.3)');
+    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.03)');
+  this.renderer.setStyle(this.el.nativeElement, 'transition', 'transform 0.3s ease');
+  this.renderer.setStyle(this.el.nativeElement, 'box-shadow', '0 4px 8px rgba(0,0,0,0.3)');
+  this.renderer.setStyle(this.el.nativeElement, 'z-index', '10');
   }
 
   @HostListener('mouseleave') onMouseLeave() {

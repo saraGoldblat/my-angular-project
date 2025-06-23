@@ -9,8 +9,16 @@ import { Order } from '../classes/order';
 export class OrderService {
 
   orderURL:string="https://localhost:7158/api/Order"
+  
 
   constructor(private http:HttpClient) { }
+   private authHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken');
+    return token
+      ? new HttpHeaders({ 'Authorization': `Bearer ${token}` })
+      : new HttpHeaders();
+  }
+
   getAllOrders():Observable<Array<Order>>
   {
     const token = localStorage.getItem('authToken'); // שליפת ה-token מ-localStorage
@@ -22,6 +30,10 @@ export class OrderService {
   }
   getOrdersByUserId(userId: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.orderURL}/user/${userId}`);
+  }
+   getOrdersByDate(date: string): Observable<Order[]> {
+    // date בפורמט ISO yyyy-MM-dd
+    return this.http.get<Order[]>(`${this.orderURL}/date/${date}`, { headers: this.authHeaders() });
   }
 }
 
